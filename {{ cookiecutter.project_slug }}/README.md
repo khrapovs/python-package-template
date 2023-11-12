@@ -1,18 +1,16 @@
-# python-package-template
+# {{ cookiecutter.project_slug }}
 
-A template for creating a Python package
+{{ cookiecutter.project_name }}
+
+## Installation
+
+```shell
+pip install {{ cookiecutter.project_slug }}
+```
 
 ## Usage
 
-Install [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/index.html):
-```shell
-pip install cookiecutter
-```
-Clone this repository and create a project from it:
-```shell
-git clone git@github.com:khrapovs/python-package-template.git
-cookiecutter python-package-template
-```
+TBA
 
 ## Contribute
 

@@ -1,0 +1,9 @@
+{
+  "full_name": "Stanislav Khrapov",
+  "email": "khrapovs@gmail.com",
+  "github_username": "khrapovs",
+  "project_name": "Python Package Boilerplate",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+  "project_short_description": "Python Boilerplate contains all the boilerplate you need to create a Python package.",
+  "__project_slug_underscore": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
+}
