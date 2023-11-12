@@ -13,6 +13,10 @@ Install [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/index.html)
 ```shell
 pip install cookiecutter
 ```
+Run cookiecutter:
+```shell
+cookiecutter https://github.com/khrapovs/python-package-template
+```
 Clone this repository and create a project from it:
 ```shell
 git clone git@github.com:khrapovs/python-package-template.git
