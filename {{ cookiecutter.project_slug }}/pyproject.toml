@@ -15,7 +15,7 @@ dependencies = []
 dynamic = ["version"]
 
 [project.urls]
-Source = "https://github.com/chintai-platform/{{ cookiecutter.project_slug }}"
+Source = "https://github.com/khrapovs/{{ cookiecutter.project_slug }}"
 
 [project.optional-dependencies]
 test = [

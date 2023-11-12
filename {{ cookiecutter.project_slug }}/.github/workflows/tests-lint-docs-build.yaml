@@ -14,9 +14,9 @@ env:
 jobs:
   test:
     name: Unit tests
-    runs-on: [self-hosted, shared]
+    runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -30,13 +30,15 @@ jobs:
 
   code-quality:
     name: Code quality checks
-    runs-on: [self-hosted, shared]
+    runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: {{ "${{ env.PYTHON_VERSION }}" }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
       - name: set PY
         run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> ${GITHUB_ENV}
       - uses: actions/cache@v3
@@ -50,9 +52,9 @@ jobs:
 
   docs:
     name: Documentation
-    runs-on: [self-hosted, shared]
+    runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -66,9 +68,9 @@ jobs:
 
   build:
     name: Build wheels
-    runs-on: [self-hosted, shared]
+    runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build wheels and source distribution
         run: |
           python -m pip install build
