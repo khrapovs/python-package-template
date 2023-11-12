@@ -12,7 +12,7 @@ theme:
         icon: material/brightness-7
         name: Switch to dark mode
 
-repo_url: https://github.com/khrapovs/{{ cookiecutter.project_slug }}
+repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 
 nav:
   - Home: index.md
