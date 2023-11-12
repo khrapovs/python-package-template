@@ -17,7 +17,7 @@ Run cookiecutter:
 ```shell
 cookiecutter https://github.com/khrapovs/python-package-template
 ```
-Clone this repository and create a project from it:
+or clone this repository and create a project from it:
 ```shell
 git clone git@github.com:khrapovs/python-package-template.git
 cookiecutter python-package-template
