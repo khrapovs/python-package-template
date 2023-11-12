@@ -1,0 +1,68 @@
+[project]
+name = "{{ cookiecutter.project_slug }}"
+description = "{{ cookiecutter.project_name }}"
+authors = [
+    {name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}"}
+]
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11"
+]
+requires-python = ">=3.10"
+dependencies = []
+dynamic = ["version"]
+
+[project.urls]
+Source = "https://github.com/chintai-platform/{{ cookiecutter.project_slug }}"
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov"
+]
+doc = [
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "mkdocs-gen-files",
+    "mkdocs-literate-nav",
+    "mkdocs-macros-plugin",
+    "pymdown-extensions"
+]
+dev = [
+    "pre-commit"
+]
+
+[build-system]
+requires = [
+    "setuptools>=45",
+    "wheel",
+    "setuptools_scm[toml]>=6.2"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+addopts = "--cov-config=.coveragerc"
+testpaths = ["tests"]
+
+[tool.setuptools_scm]
+
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+select = ["E", "F", "D", "B", "I", "ARG"]
+target-version = "py310"
+src = ["src", "tests"]
+ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "D213", "D417"]
+
+[tool.mypy]
+ignore_missing_imports = true
+install_types = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+non_interactive = true
+no_strict_optional = true

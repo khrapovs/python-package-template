@@ -1,0 +1,79 @@
+name: Tests, Code Quality
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  test:
+    name: Unit tests
+    runs-on: [self-hosted, shared]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: {{ "${{ env.PYTHON_VERSION }}" }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install dependencies
+        run: pip install -e .[test]
+      - name: Run test suite
+        run: pytest --cov={{ cookiecutter.__project_slug_underscore }}
+
+  code-quality:
+    name: Code quality checks
+    runs-on: [self-hosted, shared]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: {{ "${{ env.PYTHON_VERSION }}" }}
+      - name: set PY
+        run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> ${GITHUB_ENV}
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-{{ "${{ env.PYTHON_VERSION }}" }}-{{ "${{ hashFiles('.pre-commit-config.yaml') }}" }}
+      - name: Install dependencies
+        run: pip install pre-commit
+      - name: Run pre-commit
+        run: pre-commit run -v --show-diff-on-failure
+
+  docs:
+    name: Documentation
+    runs-on: [self-hosted, shared]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: {{ "${{ env.PYTHON_VERSION }}" }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install dependencies
+        run: pip install -e .[doc]
+      - name: Build documentation
+        run: mkdocs build -s -c
+
+  build:
+    name: Build wheels
+    runs-on: [self-hosted, shared]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build wheels and source distribution
+        run: |
+          python -m pip install build
+          python -m build --wheel --sdist --outdir dist
+      - uses: actions/upload-artifact@v3
+        with:
+          name: wheels
+          path: dist/*

@@ -1,0 +1,14 @@
+name: Tag on label
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  tag-on-label:
+    name: Tag on label
+    uses: chintai-platform/github-actions/.github/workflows/tag-on-label.yaml@0.13.3
+    secrets: inherit

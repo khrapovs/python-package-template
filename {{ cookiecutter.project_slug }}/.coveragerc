@@ -1,0 +1,11 @@
+[run]
+branch = True
+source = {{ cookiecutter.__project_slug_underscore }}
+omit = */__init__.py
+
+[paths]
+source =
+    src/
+
+[report]
+show_missing = True
